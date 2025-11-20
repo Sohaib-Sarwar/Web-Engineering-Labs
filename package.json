@@ -1,0 +1,35 @@
+{
+  "name": "web_sohaib_465597_bese14a",
+  "version": "1.0.0",
+  "description": "Lab 10: Introduction to Node.js - CS344 Web Engineering",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "task1": "node src/Task1/hello.js",
+    "task2": "node src/Task2/main.js",
+    "task4-sync": "node src/Task4/fileSync.js",
+    "task4-async": "node src/Task4/fileAsync.js",
+    "task5": "node src/Task5/pathAndOs.js",
+    "task6": "node src/Task6/events.js",
+    "task7": "node src/Task7/server.js",
+    "task8": "node src/Task8/usePackage.js",
+    "task8-express": "node src/Task8/expressServer.js",
+    "dev:task7": "nodemon src/Task7/server.js",
+    "dev:task8": "nodemon src/Task8/expressServer.js"
+  },
+  "keywords": [
+    "nodejs",
+    "web-engineering",
+    "lab"
+  ],
+  "author": "Sohaib - 465597 - BESE14A",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}

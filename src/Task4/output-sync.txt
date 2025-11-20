@@ -1,0 +1,2 @@
+Hello from synchronous file operation!
+This is written using fs.writeFileSync().
