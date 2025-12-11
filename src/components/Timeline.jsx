@@ -1,21 +1,25 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { useMode } from '../context/ModeContext';
 import { useTask } from '../context/TaskContext';
 import { motion } from 'framer-motion';
-import { Calendar, CheckCircle2, Circle } from 'lucide-react';
-import { groupTasksByDate, formatDate } from '../utils/helpers';
+import { Calendar, CheckCircle2, Circle, Clock } from 'lucide-react';
+import { groupTasksByDate, groupTasksByDueDate, formatDate, formatDueDate } from '../utils/helpers';
 import { slideUp, listItem, staggerContainer } from '../utils/animations';
 
 const Timeline = () => {
   const { theme } = useTheme();
   const { isPlayMode } = useMode();
+  const [viewMode, setViewMode] = useState('created'); // 'created' or 'due'
   
   try {
     const { tasks } = useTask();
     const safeTasks = Array.isArray(tasks) ? tasks : [];
 
-    const groupedTasks = useMemo(() => groupTasksByDate(safeTasks), [safeTasks]);
+    const groupedTasks = useMemo(() => 
+      viewMode === 'created' ? groupTasksByDate(safeTasks) : groupTasksByDueDate(safeTasks), 
+      [safeTasks, viewMode]
+    );
 
   const TimelineSection = ({ title, tasks, icon }) => {
     if (tasks.length === 0) return null;
@@ -154,15 +158,53 @@ const Timeline = () => {
           : 'bg-white border-light-border shadow-sm'
       }`}
     >
-      <div className="flex items-center gap-2 mb-6">
-        <Calendar className={`w-5 h-5 ${
-          isPlayMode && theme === 'dark' ? 'text-blue-400' : theme === 'dark' ? 'text-dark-text' : 'text-light-text'
-        }`} />
-        <h2 className={`text-lg font-bold ${
-          isPlayMode && theme === 'dark' ? 'text-white' : theme === 'dark' ? 'text-dark-text' : 'text-light-text'
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-2">
+          <Calendar className={`w-5 h-5 ${
+            isPlayMode && theme === 'dark' ? 'text-blue-400' : theme === 'dark' ? 'text-dark-text' : 'text-light-text'
+          }`} />
+          <h2 className={`text-lg font-bold ${
+            isPlayMode && theme === 'dark' ? 'text-white' : theme === 'dark' ? 'text-dark-text' : 'text-light-text'
+          }`}>
+            Timeline
+          </h2>
+        </div>
+        
+        {/* View Mode Toggle */}
+        <div className={`flex rounded-lg p-1 ${
+          theme === 'dark' ? 'bg-dark-bg' : 'bg-gray-100'
         }`}>
-          Timeline
-        </h2>
+          <button
+            onClick={() => setViewMode('created')}
+            className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium transition-all ${
+              viewMode === 'created'
+                ? theme === 'dark'
+                  ? 'bg-blue-500/20 text-blue-400'
+                  : 'bg-white text-blue-600 shadow-sm'
+                : theme === 'dark'
+                ? 'text-dark-textSecondary hover:text-dark-text'
+                : 'text-light-textSecondary hover:text-light-text'
+            }`}
+          >
+            <Clock className="w-3 h-3" />
+            Created
+          </button>
+          <button
+            onClick={() => setViewMode('due')}
+            className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium transition-all ${
+              viewMode === 'due'
+                ? theme === 'dark'
+                  ? 'bg-blue-500/20 text-blue-400'
+                  : 'bg-white text-blue-600 shadow-sm'
+                : theme === 'dark'
+                ? 'text-dark-textSecondary hover:text-dark-text'
+                : 'text-light-textSecondary hover:text-light-text'
+            }`}
+          >
+            <Calendar className="w-3 h-3" />
+            Due
+          </button>
+        </div>
       </div>
 
       <motion.div
@@ -171,25 +213,60 @@ const Timeline = () => {
         animate="visible"
         className="space-y-8 custom-scrollbar max-h-[600px] overflow-y-auto pr-2"
       >
-        <TimelineSection
-          title="Today"
-          tasks={groupedTasks.today}
-        />
-
-        <TimelineSection
-          title="Yesterday"
-          tasks={groupedTasks.yesterday}
-        />
-
-        <TimelineSection
-          title="This Week"
-          tasks={groupedTasks.thisWeek}
-        />
-
-        <TimelineSection
-          title="Older"
-          tasks={groupedTasks.older}
-        />
+        {viewMode === 'created' ? (
+          <>
+            <TimelineSection
+              title="Today"
+              tasks={groupedTasks.today}
+            />
+            <TimelineSection
+              title="Yesterday"
+              tasks={groupedTasks.yesterday}
+            />
+            <TimelineSection
+              title="This Week"
+              tasks={groupedTasks.thisWeek}
+            />
+            <TimelineSection
+              title="Older"
+              tasks={groupedTasks.older}
+            />
+          </>
+        ) : (
+          <>
+            <TimelineSection
+              title="Overdue"
+              tasks={groupedTasks.overdue}
+            />
+            <TimelineSection
+              title="Today"
+              tasks={groupedTasks.today}
+            />
+            <TimelineSection
+              title="Tomorrow"
+              tasks={groupedTasks.tomorrow}
+            />
+            <TimelineSection
+              title="This Week"
+              tasks={groupedTasks.thisWeek}
+            />
+            {/* Dynamic future date sections */}
+            {Object.keys(groupedTasks.futureDates || {})
+              .sort()
+              .map(dateKey => (
+                <TimelineSection
+                  key={dateKey}
+                  title={groupedTasks.futureDates[dateKey].label}
+                  tasks={groupedTasks.futureDates[dateKey].tasks}
+                />
+              ))
+            }
+            <TimelineSection
+              title="No Due Date"
+              tasks={groupedTasks.noDueDate}
+            />
+          </>
+        )}
 
         {safeTasks.length === 0 && (
           <div className="text-center py-8">
