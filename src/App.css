@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  background: #ecf0f3;
+}
+
+.app-header {
+  max-width: 1200px;
+  margin: 0 auto 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: fadeInDown 0.5s ease-out;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-icon {
+  font-size: 3rem;
+  color: #3498db;
+  padding: 0.75rem;
+  background: #ecf0f3;
+  border-radius: 16px;
+  box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.6),
+              -6px -6px 12px rgba(255, 255, 255, 0.5);
+}
+
+.header-text h1 {
+  font-size: 2.25rem;
+  color: #2c3e50;
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -1px;
+}
+
+.header-text p {
+  font-size: 1rem;
+  color: #95a5a6;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.btn-add-guest {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: #ecf0f3;
+  color: #2c3e50;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.6),
+              -6px -6px 12px rgba(255, 255, 255, 0.5);
+}
+
+.btn-add-guest:hover {
+  box-shadow: 4px 4px 8px rgba(163, 177, 198, 0.6),
+              -4px -4px 8px rgba(255, 255, 255, 0.5);
+}
+
+.btn-add-guest:active {
+  box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.5),
+              inset -3px -3px 6px rgba(255, 255, 255, 0.5);
+}
+
+.btn-add-guest svg {
+  font-size: 1.25rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.btn-export-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: #ecf0f3;
+  color: #27ae60;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.6),
+              -6px -6px 12px rgba(255, 255, 255, 0.5);
+}
+
+.btn-export-header:hover {
+  box-shadow: 4px 4px 8px rgba(163, 177, 198, 0.6),
+              -4px -4px 8px rgba(255, 255, 255, 0.5);
+}
+
+.btn-export-header:active {
+  box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.5),
+              inset -3px -3px 6px rgba(255, 255, 255, 0.5);
+}
+
+.btn-export-header svg {
+  font-size: 1.25rem;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding: 1.5rem 1rem;
+  }
+  
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .header-actions {
+    width: 100%;
+  }
+  
+  .header-actions button {
+    flex: 1;
+  }
+  
+  .btn-add-guest,
+  .btn-export-header {
+    justify-content: center;
+  }
+  
+  .header-text h1 {
+    font-size: 1.75rem;
+  }
+  
+  .header-icon {
+    font-size: 2rem;
+  }
+}

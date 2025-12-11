@@ -1,0 +1,125 @@
+.rsvp-summary {
+  margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.summary-card {
+  background: #ecf0f3;
+  padding: 2rem;
+  border-radius: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
+              -9px -9px 16px rgba(255, 255, 255, 0.5);
+  position: relative;
+}
+
+.summary-card:hover {
+  box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.6),
+              -6px -6px 12px rgba(255, 255, 255, 0.5);
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.4),
+              inset -4px -4px 8px rgba(255, 255, 255, 0.5);
+}
+
+.summary-card:hover .card-icon {
+  transform: scale(1.05);
+}
+
+.card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.summary-number {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -1px;
+  color: #2c3e50;
+}
+
+.summary-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  color: #7f8c8d;
+}
+
+.summary-total .card-icon {
+  background: #ecf0f3;
+  color: #6366f1;
+}
+
+.summary-confirmed .card-icon {
+  background: #ecf0f3;
+  color: #10b981;
+}
+
+.summary-unconfirmed .card-icon {
+  background: #ecf0f3;
+  color: #f59e0b;
+}
+
+.summary-rsvp .card-icon {
+  background: #ecf0f3;
+  color: #3b82f6;
+}
+
+.summary-vip .card-icon {
+  background: #ecf0f3;
+  color: #ec4899;
+}
+
+@media (max-width: 768px) {
+  .summary-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .btn-export {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .summary-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+  
+  .summary-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}
