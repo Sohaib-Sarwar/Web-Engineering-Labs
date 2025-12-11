@@ -16,6 +16,7 @@ const TaskForm = ({ show, onClose, editTask = null }) => {
     description: '',
     category: 'Work',
     priority: 'Medium',
+    dueDate: '',
   });
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const TaskForm = ({ show, onClose, editTask = null }) => {
         description: editTask.description || '',
         category: editTask.category,
         priority: editTask.priority || 'Medium',
+        dueDate: editTask.dueDate || '',
       });
     } else {
       setFormData({
@@ -32,6 +34,7 @@ const TaskForm = ({ show, onClose, editTask = null }) => {
         description: '',
         category: 'Work',
         priority: 'Medium',
+        dueDate: '',
       });
     }
   }, [editTask, show]);
@@ -47,7 +50,7 @@ const TaskForm = ({ show, onClose, editTask = null }) => {
       addTask(formData);
     }
 
-    setFormData({ title: '', description: '', category: 'Work', priority: 'Medium' });
+    setFormData({ title: '', description: '', category: 'Work', priority: 'Medium', dueDate: '' });
     onClose();
   };
 
@@ -209,6 +212,28 @@ const TaskForm = ({ show, onClose, editTask = null }) => {
                 <option value="Medium">Medium</option>
                 <option value="Low">Low</option>
               </select>
+            </div>
+
+            {/* Due Date */}
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${
+                theme === 'dark' ? 'text-dark-text' : 'text-light-text'
+              }`}>
+                Due Date
+              </label>
+              <input
+                type="date"
+                name="dueDate"
+                value={formData.dueDate}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 rounded-lg border transition-all ${
+                  theme === 'dark'
+                    ? 'bg-dark-bg border-dark-border text-dark-text focus:border-blue-500'
+                    : 'bg-light-bg border-light-border text-light-text focus:border-light-accent'
+                } focus:outline-none focus:ring-2 focus:ring-opacity-50 ${
+                  theme === 'dark' ? 'focus:ring-blue-500' : 'focus:ring-light-accent'
+                }`}
+              />
             </div>
 
             {/* Actions */}

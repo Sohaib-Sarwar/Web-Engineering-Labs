@@ -4,8 +4,8 @@ import { useMode } from '../context/ModeContext';
 import { useTask } from '../context/TaskContext';
 import { useGamification } from '../context/GamificationContext';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Circle, Edit2, Trash2, MoreVertical, Briefcase, User, BookOpen, Heart, DollarSign, Tag } from 'lucide-react';
-import { getCategoryColor, getCategoryIcon, formatDate } from '../utils/helpers';
+import { CheckCircle2, Circle, Edit2, Trash2, MoreVertical, Briefcase, User, BookOpen, Heart, DollarSign, Tag, Calendar } from 'lucide-react';
+import { getCategoryColor, getCategoryIcon, formatDate, formatDueDate } from '../utils/helpers';
 import { cardHover } from '../utils/animations';
 import TaskForm from './TaskForm';
 
@@ -60,7 +60,7 @@ const TaskCard = ({ task, index }) => {
               ? 'glass-card card-3d border-white/10 hover:glass-card-hover hover:border-blue-500/30'
               : 'bg-dark-surface border-dark-border card-3d'
             : 'bg-white border-light-border card-3d'
-        } ${task.completed ? 'opacity-60' : ''}`}
+        } ${task.completed ? 'opacity-60' : ''} ${showMenu ? 'z-30' : ''}`}
       >
         <div className="flex items-start gap-3">
           {/* Checkbox */}
@@ -131,6 +131,18 @@ const TaskCard = ({ task, index }) => {
               }`}>
                 {formatDate(task.createdAt)}
               </span>
+
+              {/* Due Date */}
+              {task.dueDate && (
+                <span className={`inline-flex items-center gap-1 text-xs ${
+                  new Date(task.dueDate) < new Date() && !task.completed
+                    ? theme === 'dark' ? 'text-red-400' : 'text-red-600'
+                    : theme === 'dark' ? 'text-dark-textSecondary' : 'text-light-textSecondary'
+                }`}>
+                  <Calendar className="w-3 h-3" />
+                  {formatDueDate(task.dueDate)}
+                </span>
+              )}
 
               {/* Completed Badge - Play Mode Only */}
               {isPlayMode && task.completed && (
