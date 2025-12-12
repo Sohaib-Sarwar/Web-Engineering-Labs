@@ -4,12 +4,25 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
   font-weight: 400;
-  color: #2c3e50;
-  background-color: #ecf0f3;
+  color: #f5f0ff;
+  background-color: #1a0a2e;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Royal Purple & Gold Color Scheme */
+  --royal-purple: #6b21a8;
+  --deep-purple: #4c1d95;
+  --light-purple: #a855f7;
+  --gold: #fbbf24;
+  --gold-light: #fcd34d;
+  --gold-dark: #d97706;
+  --majestic-bg: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #1a0a2e 100%);
+  --glass-bg: rgba(107, 33, 168, 0.15);
+  --glass-border: rgba(251, 191, 36, 0.3);
+  --text-primary: #f5f0ff;
+  --text-secondary: #c4b5fd;
+  --text-muted: #a78bfa;
 }
 
 * {
@@ -20,23 +33,128 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #ecf0f3;
+  background: var(--majestic-bg);
+  background-attachment: fixed;
 }
 
+
 /* Scrollbar styling */
+
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f5f5f5;
+  background: rgba(76, 29, 149, 0.3);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ccc;
+  background: linear-gradient(180deg, var(--gold) 0%, var(--gold-dark) 100%);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #999;
+  background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 100%);
+}
+
+
+/* Smooth scrolling */
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* Selection styling */
+
+::selection {
+  background: rgba(251, 191, 36, 0.3);
+  color: #f5f0ff;
+}
+
+::-moz-selection {
+  background: rgba(251, 191, 36, 0.3);
+  color: #f5f0ff;
+}
+
+
+/* Focus-visible for keyboard accessibility */
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+
+/* Remove default focus for mouse users */
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+
+/* Reduced motion preference */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+
+/* Visually hidden utility for screen readers */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* Reset list styles for semantic lists */
+
+ul.guest-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.guest-list>li {
+  list-style: none;
+}
+
+
+/* Address element reset */
+
+address {
+  font-style: normal;
+}
+
+
+/* Links in contact info */
+
+.guest-contact a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.guest-contact a:hover {
+  color: var(--gold);
+  text-decoration: underline;
 }
