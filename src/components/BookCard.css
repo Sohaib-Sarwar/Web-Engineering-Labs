@@ -1,0 +1,236 @@
+.book-card {
+  background: var(--bg-primary);
+  border-radius: 20px;
+  padding: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  transition: all 0.3s ease;
+  animation: slideIn 0.4s ease-out;
+  box-shadow: var(--shadow-neumorphic);
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-neumorphic-lg);
+}
+
+.book-card.editing {
+  box-shadow: var(--shadow-neumorphic-inset);
+}
+
+.book-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 15px;
+  background: var(--bg-primary);
+  box-shadow: var(--shadow-neumorphic);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.book-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.book-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.book-author {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.book-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.btn-favorite,
+.btn-edit,
+.btn-delete {
+  background: var(--bg-primary);
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 1.125rem;
+  box-shadow: var(--shadow-neumorphic);
+}
+
+.btn-favorite.active {
+  color: #000;
+  background: var(--bg-primary);
+}
+
+.btn-favorite.active svg {
+  fill: #000;
+}
+
+.btn-favorite:hover {
+  color: #000;
+  box-shadow: var(--shadow-neumorphic-inset);
+}
+
+.btn-edit,
+.btn-delete {
+  color: var(--text-primary);
+}
+
+.btn-edit:hover,
+.btn-delete:hover {
+  box-shadow: var(--shadow-neumorphic-inset);
+}
+
+.btn-edit:active,
+.btn-delete:active {
+  transform: scale(0.95);
+}
+
+.btn-delete:hover {
+  color: #dc2626;
+}
+
+/* Edit Form */
+.edit-form {
+  width: 100%;
+}
+
+.edit-form .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.edit-form .form-group:last-of-type {
+  margin-bottom: 1.5rem;
+}
+
+.edit-form label {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.edit-form input {
+  width: 100%;
+  padding: 0.875rem 1.125rem;
+  background: var(--bg-primary);
+  border: none;
+  border-radius: 15px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  box-shadow: var(--shadow-neumorphic-inset);
+  transition: all 0.3s ease;
+}
+
+.edit-form input:focus {
+  outline: none;
+  box-shadow: inset 8px 8px 12px var(--shadow-dark), inset -8px -8px 12px var(--shadow-light);
+}
+
+.edit-form input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-save,
+.btn-cancel {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-save {
+  background: var(--accent);
+  color: white;
+  box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+}
+
+.btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: 7px 7px 14px var(--shadow-dark), -7px -7px 14px var(--shadow-light);
+}
+
+.btn-save:active {
+  transform: translateY(0);
+  box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+}
+
+.btn-cancel {
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  box-shadow: var(--shadow-neumorphic);
+}
+
+.btn-cancel:hover {
+  box-shadow: var(--shadow-neumorphic-inset);
+  color: var(--text-primary);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .book-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .book-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .book-title,
+  .book-author {
+    white-space: normal;
+  }
+}
